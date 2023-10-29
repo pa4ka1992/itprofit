@@ -1,0 +1,204 @@
+@import 'normalize.css';
+@import './styles/vars.scss';
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+  z-index: 1;
+
+  font-family: 'Poppins', sans-serif;
+
+  color: #000;
+
+
+
+  .container {
+    margin: 0 auto;
+    padding: 0 1em;
+    max-width: 1170px;
+  }
+
+  header {
+    padding: 0.3em 0;
+    width: 100%;
+
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: $border;
+    z-index: 15;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        max-height: 3rem;
+
+        @include scale;
+      }
+      .burger {
+        display: none;
+        font: {
+          weight: 500;
+          size: 1.2rem;
+        }
+        text-shadow: 2px 2px 2px #000;
+
+        @include hover;
+        color: $bir;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  main {
+    padding: 1rem 0;
+
+    .container {
+      display: flex;
+      gap: 2rem;
+
+      position: relative;
+
+      .error {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        padding: 1.5rem;
+
+        font: {
+          size: 1.2rem;
+          weight: 700;
+        }
+        white-space: nowrap;
+
+        background-color: $red;
+        border: $border;
+        border-radius: 20px;
+        transform: translateX(-30%);
+        z-index: 11;
+
+      }
+    }
+  }
+
+  footer {
+    width: 100%;
+    z-index: 5;
+
+    font-weight: 500;
+    text-shadow: 2px 2px 2px #000;
+
+    color: $bir;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: $border;
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      height: 4em;
+
+      .git {
+        display: block;
+
+        text-transform: uppercase;
+
+        @include hover;
+      }
+
+      .rs {
+        .rs-logo {
+          display: block;
+
+          padding: 0.75em;
+          width: 100%;
+          max-height: 4em;
+
+          @include scale;
+          background: radial-gradient(circle, $bir 0%, transparent 100%);
+          border-radius: 15px;
+        }
+      }
+
+      .copyright {
+        font-size: 1rem;
+        text-align: center;
+
+        &:before {
+          content: '©';
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+
+  body {
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      background-color: #ffffffa1;
+
+      .container {
+        .burger {
+          display: block;
+        }
+      }
+    }
+
+    main {
+      margin-top: 4rem;
+      padding: 0;
+
+      .container {
+        min-height: 250vh;
+        padding: 0;
+
+        overflow: hidden;
+
+        .error {
+          transform: translateX( -50%);
+        }
+      }
+    }
+  }
+}
