@@ -15,7 +15,7 @@ export class AppView implements Component {
   }
 
   render() {
-    const modalButton = new Button(this.el, 'submit', 'Modal');
+    const modalButton = new Button(this.el, 'submit', 'Показать');
 
     modalButton.addListener(() => {
       const modal = new Modal();

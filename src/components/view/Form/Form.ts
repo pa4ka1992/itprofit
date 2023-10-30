@@ -45,7 +45,7 @@ export class Form implements Component {
       field.render();
     });
 
-    const sendButton = new Button(this.el, 'submit', 'Send');
+    const sendButton = new Button(this.el, 'submit', 'Отправить');
 
     sendButton.render();
     this.message.classList.add('form__message');

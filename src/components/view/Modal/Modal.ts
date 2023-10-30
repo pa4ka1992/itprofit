@@ -11,7 +11,7 @@ export class Modal implements Component {
 
   render() {
     this.el.id = 'modal';
-    const closeButton = new Button(this.el, 'button', 'Close');
+    const closeButton = new Button(this.el, 'button', 'Закрыть');
     closeButton.addListener(() => {
       this.close();
     });
@@ -20,7 +20,7 @@ export class Modal implements Component {
 
     const content = document.createElement('span');
     content.classList.add('modal__content');
-    content.textContent = 'Some message';
+    content.textContent = 'Что-то написано';
     content.onmousedown = (e) => {
       e.stopPropagation();
     };
