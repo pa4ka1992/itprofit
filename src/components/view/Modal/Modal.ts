@@ -21,7 +21,14 @@ export class Modal implements Component {
     const content = document.createElement('span');
     content.classList.add('modal__content');
     content.textContent = 'Some message';
+    content.onmousedown = (e) => {
+      e.stopPropagation();
+    };
+
     this.el.append(content);
+    this.el.onmousedown = () => {
+      this.close();
+    };
 
     document.body.prepend(this.el);
     document.body.style.overflow = 'hidden';
