@@ -12,13 +12,8 @@ interface RegisterResponse {
 }
 
 export class Api {
-  constructor() {
-    console.log('api');
-  }
-
   async registerUser(data: FormData): Promise<RegisterResponse> {
     try {
-      console.log('request');
       const response = await fetch('http://localhost:9090/api/registration', {
         method: 'POST',
         body: data,

@@ -4,6 +4,7 @@ import { Api } from '@/components/controller/api';
 import { FormField } from '../FormField/FormField';
 import { validationRules } from '@/components/utils/validationRules';
 import { useMaskField } from '@/components/utils/phoneDecorator';
+import { Button } from '../Button/Button';
 
 export class Form implements Component {
   el: HTMLFormElement;
@@ -30,23 +31,25 @@ export class Form implements Component {
   }
 
   render() {
-    this.fields.forEach((field) => {
-      field.render();
-    });
-
-    const button = document.createElement('button');
-    button.setAttribute('type', 'submit');
-    button.textContent = 'Send';
-
     this.el.id = 'form';
-    this.el.append(button);
-
+    this.el.innerHTML = `
+    <h3 class="form__title"> Форма пользователя </h3>
+    `;
     this.el.onsubmit = (e) => {
       e.preventDefault();
 
       this.validateForm();
     };
 
+    this.fields.forEach((field) => {
+      field.render();
+    });
+
+    const sendButton = new Button(this.el, 'submit', 'Send');
+
+    sendButton.render();
+    this.message.classList.add('form__message');
+    this.el.append(this.message);
     this.parent.append(this.el);
   }
 
@@ -66,16 +69,20 @@ export class Form implements Component {
         if (data.status === 'success') {
           if (data.msg) {
             this.message.textContent = data.msg;
+            this.message.style.color = '#06ce8f';
             this.fields.forEach((field) => {
               field.clear();
             });
           }
         } else {
           this.message.textContent = 'Сервер недоступен';
+          this.message.style.color = '#ff6e6e';
         }
-
-        this.el.append(this.message);
       });
+
+      setTimeout(() => {
+        this.message.textContent = '';
+      }, 5000);
     }
   }
 }

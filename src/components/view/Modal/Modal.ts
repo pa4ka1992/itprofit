@@ -1,5 +1,6 @@
 import { Component } from '@/types';
 import './Modal.scss';
+import { Button } from '../Button/Button';
 
 export class Modal implements Component {
   el: HTMLDivElement;
@@ -10,23 +11,24 @@ export class Modal implements Component {
 
   render() {
     this.el.id = 'modal';
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Close';
-    closeButton.onclick = () => {
+    const closeButton = new Button(this.el, 'button', 'Close');
+    closeButton.addListener(() => {
       this.close();
-    };
+    });
+    closeButton.addClass('close__button');
+    closeButton.render();
 
     const content = document.createElement('span');
     content.classList.add('modal__content');
     content.textContent = 'Some message';
-    this.el.append(closeButton, content);
+    this.el.append(content);
 
     document.body.prepend(this.el);
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden';
   }
 
   close() {
     this.el.remove();
-    document.body.style.overflow = ''
+    document.body.style.overflow = '';
   }
 }

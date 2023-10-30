@@ -28,8 +28,8 @@ function isPhone(val: string | null) {
 }
 
 export const validationRules = {
-  name: { name: 'name', type: 'text', handler: isNotEmpty, error: 'name is required' },
-  email: { name: 'email', type: 'text', handler: isEmail, error: 'email is invalid' },
-  phone: { name: 'phone', type: 'text', handler: isPhone, error: 'phone is invalid' },
-  message: { name: 'message', type: 'text', handler: isNotEmpty, error: 'messge is required' },
+  name: { name: 'Имя', type: 'text', handler: isNotEmpty, error: 'Введите имя' },
+  email: { name: 'Электронная почта', type: 'text', handler: isEmail, error: 'Почта не валидна' },
+  phone: { name: 'Телефон', type: 'text', handler: isPhone, error: 'Телефон не валиден' },
+  message: { name: 'Сообщение', type: 'text', handler: isNotEmpty, error: 'Введите сообщение' },
 };

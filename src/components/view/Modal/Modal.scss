@@ -1,9 +1,30 @@
 #modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: #000000a8;
-  transition: all 0.2s;
+  z-index: 500;
+  animation: scalein;
+  animation-duration: 0.3s;
+
+  .modal__content {
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+}
+
+@keyframes scalein {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }

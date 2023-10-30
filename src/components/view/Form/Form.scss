@@ -3,4 +3,72 @@
 #form {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
+
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 5px #0003, 0 2px 2px #00000024, 0 3px 1px -2px #0000001f;
+
+  .form {
+    &__title {
+      padding-bottom: 0.5em;
+      min-width: 300px;
+      text-align: center;
+      border-bottom: 1px solid $border;
+    }
+
+    &__button {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: relative;
+      outline: 0;
+      border: 0;
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 1.715em;
+      text-decoration: none;
+      color: #fff;
+      background-color: $primary;
+      border-radius: 3px;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-align: center;
+      width: auto;
+      height: auto;
+      cursor: pointer;
+      padding: 4px 16px;
+      min-height: 2.572em;
+      transition: all 0.3s;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: inherit;
+        box-shadow: 0 1px 5px #0003, 0 2px 2px #00000024, 0 3px 1px -2px #0000001f;
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        background-color: $primary-lighter;
+      }
+
+      &:active {
+        &::before {
+          box-shadow: 0 3px 5px -1px #0003, 0 5px 8px #00000024, 0 1px 14px #0000001f;
+        }
+      }
+    }
+
+    &__message {
+      text-align: center;
+      min-height: 1.2rem;
+    }
+  }
 }
