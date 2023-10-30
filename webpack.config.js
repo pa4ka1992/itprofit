@@ -1,8 +1,8 @@
 const path = require('path');
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index'),
@@ -31,7 +31,7 @@ const baseConfig = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
-      {test: /\.ts$/i, use: 'ts-loader'},
+      { test: /\.ts$/i, use: 'ts-loader' },
       {
         test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
         type: 'asset',
@@ -91,8 +91,10 @@ const baseConfig = {
   ],
 };
 
-module.exports = ({mode}) => {
+module.exports = ({ mode }) => {
   const isProductionMode = mode === 'prod';
-  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+  const envConfig = isProductionMode
+    ? require('./webpack.prod.config')
+    : require('./webpack.dev.config');
   return merge(baseConfig, envConfig);
 };

@@ -1,21 +1,35 @@
-interface ValidationRule {
+import Inputmask from 'inputmask/dist/inputmask.es6.js';
+import { phoneMask } from './phoneDecorator';
+
+export interface ValidationRule {
   name: string;
-  handler: (val: string) => boolean;
+  type: string;
+  handler: (val: string | null) => boolean;
   error: string;
 }
 
-function isNotEmpty(val: string) {
+function isNotEmpty(val: string | null) {
   return !!val;
 }
 
-function isEmail(val: string) {
+function isEmail(val: string | null) {
+  if (!val) {
+    return false;
+  }
+
   const regExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regExp.test(val);
 }
 
-export const validationRules: ValidationRule[] = [
-  { name: 'name', handler: isNotEmpty, error: 'name is required' },
-  { name: 'email', handler: isEmail, error: 'email is invalid' },
-  { name: 'phone', handler: isNotEmpty, error: 'phone is required' },
-  { name: 'message', handler: isNotEmpty, error: 'messge is required' },
-];
+function isPhone(val: string | null) {
+  const regExp = /\d{9}/;
+  const unmaskedVal = Inputmask.unmask(val, { mask: phoneMask });
+  return regExp.test(unmaskedVal);
+}
+
+export const validationRules = {
+  name: { name: 'name', type: 'text', handler: isNotEmpty, error: 'name is required' },
+  email: { name: 'email', type: 'text', handler: isEmail, error: 'email is invalid' },
+  phone: { name: 'phone', type: 'text', handler: isPhone, error: 'phone is invalid' },
+  message: { name: 'message', type: 'text', handler: isNotEmpty, error: 'messge is required' },
+};

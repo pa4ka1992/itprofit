@@ -4,3 +4,9 @@ export interface FormControl extends HTMLFormControlsCollection {
   phone: HTMLInputElement;
   message: HTMLInputElement;
 }
+
+export interface Component {
+  el: HTMLElement;
+
+  render: () => void;
+}

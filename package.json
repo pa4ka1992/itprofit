@@ -8,7 +8,8 @@
         "serve": "webpack serve --open --config ./webpack.config.js --env mode=dev",
         "prod": "webpack --config ./webpack.config.js --env mode=prod",
         "lint": "eslint . --ext .ts",
-        "clean": "rm -rf dist cache"
+        "clean": "rm -rf dist cache",
+        "server": "node server/index.js"
     },
     "repository": {
         "type": "git",

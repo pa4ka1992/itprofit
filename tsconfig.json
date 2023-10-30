@@ -38,12 +38,10 @@
     "suppressImplicitAnyIndexErrors": false,
     "noStrictGenericChecks": false,
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js", "custom.d.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "server"],
   "compileOnSave": false
 }

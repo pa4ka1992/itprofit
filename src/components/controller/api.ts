@@ -3,17 +3,24 @@ interface ApiResponse {
   message: string;
 }
 
+interface RegisterResponse {
+  status: string;
+  msg?: string;
+  fields?: {
+    inputName: string;
+  };
+}
+
 export class Api {
   constructor() {
     console.log('api');
   }
 
-  async registerUser(data: FormData) {
+  async registerUser(data: FormData): Promise<RegisterResponse> {
     try {
       console.log('request');
       const response = await fetch('http://localhost:9090/api/registration', {
         method: 'POST',
-        mode: 'cors',
         body: data,
       });
 

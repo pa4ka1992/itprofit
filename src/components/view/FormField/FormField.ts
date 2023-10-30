@@ -1,44 +1,60 @@
+// import Inputmask from 'inputmask';
+import { ValidationRule } from '@/components/utils/validationRules';
 import './FormField.scss';
-import Inputmask from "inputmask";
+import { Component } from '@/types';
 
-export class FormField extends HTMLElement {
+export class FormField implements Component {
+  el: HTMLElement;
+
   error: HTMLSpanElement;
 
   input: HTMLInputElement;
 
   label: HTMLLabelElement;
 
-  static get observedAttributes() {
-    return ['error'];
-  }
+  parent: HTMLFormElement;
 
-  constructor() {
-    super();
+  props: ValidationRule;
+
+  constructor(parent: HTMLFormElement, props: ValidationRule) {
+    this.parent = parent;
+    this.props = props;
+    this.el = document.createElement('div');
     this.error = document.createElement('span');
     this.input = document.createElement('input');
     this.label = document.createElement('label');
-    const name = this.getAttribute('name');
-
-    if (name) {
-      this.label.setAttribute('for', name);
-      this.label.textContent = name;
-      this.input.setAttribute('name', name);
-      this.input.setAttribute('type', 'text');
-
-      if (name === 'phone') {
-        const im = new Inputmask('+375 (99) 999-99-99');
-        im.mask(this.input);
-      }
-    }
-
-    this.append(this.label, this.input, this.error);
   }
 
-  attributeChangedCallback(name: string, _: string, newValue: string) {
-    if (name === 'error') {
-      this.error.textContent = newValue;
+  render() {
+    this.label.setAttribute('for', this.props.name);
+    this.label.textContent = this.props.name;
+    this.label.classList.add('form__field-label');
+
+    this.input.setAttribute('name', this.props.name);
+    this.input.setAttribute('type', this.props.type);
+    this.input.classList.add('form__field-input');
+
+    this.error.classList.add('form__field-error');
+
+    this.el.classList.add('form__field');
+    this.el.append(this.label, this.input, this.error);
+
+    this.parent.append(this.el);
+  }
+
+  validate() {
+    const isValid = this.props.handler(this.input.value);
+
+    if (isValid) {
+      this.error.textContent = '';
+    } else {
+      this.error.textContent = this.props.error;
     }
+
+    return isValid;
+  }
+
+  clear() {
+    this.input.value = '';
   }
 }
-
-customElements.define('form-field', FormField);

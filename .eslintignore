@@ -103,3 +103,4 @@ tsconfig.json
 .prettierrc.js
 postcss.config.js
 /cache/
+server/

@@ -1,3 +1,7 @@
 import './index.html';
 import './global.scss';
-import './components/app/app';
+import { App } from './components/app/app';
+
+const app = new App()
+
+app.render()
